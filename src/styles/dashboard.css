@@ -1,0 +1,167 @@
+.dashboard {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.dashboard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  z-index: 1;
+  position: relative;
+}
+
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+}
+
+.keypair-card {
+  margin-bottom: 2rem;
+}
+
+.keypair-item {
+  border: 1px solid var(--primary-green);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.keypair-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.keypair-date {
+  font-size: 0.8rem;
+  color: var(--soft-white);
+  opacity: 0.7;
+}
+
+.keypair-info {
+  margin-bottom: 1rem;
+}
+
+.key-field {
+  margin: 0.5rem 0;
+}
+
+.key-field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--primary-green);
+}
+
+.key-value {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 255, 0, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.key-value code {
+  flex: 1;
+  font-family: 'Space Mono', monospace;
+  word-break: break-all;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--primary-green);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn:hover {
+  opacity: 0.8;
+}
+
+.keypair-actions {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.keypair-form {
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.keypair-input,
+.message-input,
+.keypair-select {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--primary-green);
+  border-radius: 4px;
+  color: var(--soft-white);
+  font-family: 'Space Mono', monospace;
+}
+
+.message-input {
+  min-height: 100px;
+  resize: vertical;
+  margin: 1rem 0;
+}
+
+.keypair-select {
+  margin-bottom: 1rem;
+}
+
+.message-signer {
+  margin-top: 2rem;
+}
+
+.signed-message {
+  background: rgba(0, 255, 0, 0.1);
+  padding: 1rem;
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+  word-break: break-all;
+  margin-top: 1rem;
+}
+
+.btn-danger {
+  border-color: var(--error-red);
+  color: var(--error-red);
+}
+
+.btn-danger:hover {
+  background: var(--error-red);
+  box-shadow: 0 0 15px var(--error-red);
+}
+
+.btn-import {
+  cursor: pointer;
+}
+
+.keypair-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.btn-logout {
+  font-size: 0.9rem;
+  padding: 0.5em 1em;
+}

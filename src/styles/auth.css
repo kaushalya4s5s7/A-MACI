@@ -1,0 +1,39 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  z-index: 1;
+}
+
+.auth-card h2 {
+  color: var(--primary-green);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--primary-green);
+  border-radius: 4px;
+  color: var(--soft-white);
+  font-family: 'Space Mono', monospace;
+}
+
+.error {
+  color: var(--error-red);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

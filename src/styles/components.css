@@ -1,0 +1,31 @@
+/* Button styles */
+.btn {
+  font-family: 'Orbitron', sans-serif;
+  background: transparent;
+  border: 2px solid var(--primary-green);
+  color: var(--primary-green);
+  padding: 0.8em 1.6em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn:hover {
+  background: var(--primary-green);
+  color: var(--bg-dark);
+  box-shadow: 0 0 15px var(--primary-green);
+  transform: translateY(-2px);
+}
+
+/* Card styles */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2rem;
+  border: 1px solid rgba(0, 255, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 255, 0, 0.1);
+  margin: 1rem 0;
+}
