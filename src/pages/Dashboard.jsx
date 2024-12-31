@@ -14,20 +14,70 @@ import KeypairForm from "../components/KeypairForm";
 import MessageSigner from "../components/MessageSigner";
 import MatrixRain from "../components/MatrixRain";
 
+const splitKey = (key, totalParts = 5) => {
+  const parts = [];
+  const partSize = Math.floor(key.length / totalParts);
+
+  for (let i = 0; i < totalParts; i++) {
+    parts.push(key.substr(i * partSize, partSize));
+  }
+
+  return parts;
+};
+
+const saveInIndexedDB = (part, index) => {
+  const dbRequest = indexedDB.open("keyPairsDB", 1);
+
+  dbRequest.onupgradeneeded = () => {
+    const db = dbRequest.result;
+    if (!db.objectStoreNames.contains("keyParts")) {
+      db.createObjectStore("keyParts", { keyPath: "index" });
+    }
+  };
+
+  dbRequest.onsuccess = () => {
+    const db = dbRequest.result;
+    const transaction = db.transaction("keyParts", "readwrite");
+    const store = transaction.objectStore("keyParts");
+    store.put({ index, part });
+  };
+
+  dbRequest.onerror = (error) => {
+    console.error("Error storing key part in IndexedDB:", error);
+  };
+};
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [keypairs, saveKeypairs] = useKeypairStorage();
   const [activeKeypairIds, setActiveKeypairIds] = useState([]);
-  const [editingKeypairId, setEditingKeypairId] = useState(null); // Track editing state
+  const [editingKeypairId, setEditingKeypairId] = useState(null);
   const [status, setStatus] = useState("none");
   const [signedMessage, setSignedMessage] = useState("");
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [keyPartsLocations, setKeyPartsLocations] = useState([]);
   const fileInputRef = useRef(null);
 
   const generateKeypair = () => {
+    const privateKey = "priv_" + Math.random().toString(36).substr(2, 18);
+
+    // Split the key into 5 parts
+    const keyParts = splitKey(privateKey, 5);
+
+    // Store the first 3 parts in IndexedDB
+    keyParts.slice(0, 3).forEach((part, index) => saveInIndexedDB(part, index));
+
+    // Simulate the remaining 2 parts being stored elsewhere
+    const partsLocations = keyParts.map((part, index) =>
+      index < 3
+        ? `Part ${index + 1}: Stored in IndexedDB`
+        : `Part ${index + 1}: To be stored on a secure server`
+    );
+
     const newKeypair = {
       id: Date.now().toString(),
       publicKey: "ed25519_" + Math.random().toString(36).substr(2, 9),
-      privateKey: "priv_" + Math.random().toString(36).substr(2, 9),
+      privateKey,
       label: "",
       status: "active",
       createdAt: new Date().toISOString(),
@@ -36,6 +86,7 @@ const Dashboard = () => {
     const updatedKeypairs = [...keypairs, newKeypair];
     saveKeypairs(updatedKeypairs);
     setActiveKeypairIds([...activeKeypairIds, newKeypair.id]);
+    setKeyPartsLocations(partsLocations);
     setStatus("active");
   };
 
@@ -44,7 +95,7 @@ const Dashboard = () => {
       kp.id === keypairId ? { ...kp, label } : kp
     );
     saveKeypairs(updatedKeypairs);
-    setEditingKeypairId(null); // Exit editing mode after saving
+    setEditingKeypairId(null);
   };
 
   const discardSelectedKeypairs = () => {
@@ -103,6 +154,10 @@ const Dashboard = () => {
       return keypair ? signMessage(message, keypair.privateKey) : null;
     });
     setSignedMessage(signatures.join("\n"));
+    setConfirmationMessage("Key has successfully signed the message.");
+
+    // Clear the confirmation message after a few seconds
+    setTimeout(() => setConfirmationMessage(""), 3000);
   };
 
   const handleLogout = () => {
@@ -199,6 +254,17 @@ const Dashboard = () => {
               )}
             </motion.div>
           ))}
+
+          {keyPartsLocations.length > 0 && (
+            <div className="key-parts-locations">
+              <h3>Key Parts Distribution</h3>
+              <ul>
+                {keyPartsLocations.map((location, index) => (
+                  <li key={index}>{location}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </motion.div>
 
         {keypairs.length > 0 && (
@@ -216,6 +282,9 @@ const Dashboard = () => {
           >
             <h3>Signed Message</h3>
             <pre className="signed-message">{signedMessage}</pre>
+            {confirmationMessage && (
+              <p className="confirmation-message">{confirmationMessage}</p>
+            )}
           </motion.div>
         )}
       </div>
