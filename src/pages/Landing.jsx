@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import MatrixRain from '../components/MatrixRain';
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import MatrixRain from "../components/MatrixRain";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -8,28 +8,28 @@ const Landing = () => {
   return (
     <div className="landing">
       <MatrixRain />
-      <motion.div 
+      <motion.div
         className="hero"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <h1>A-MACI Keypair Management</h1>
+        <h1>Aegis Key</h1>
         <p>Secure, Anonymous, Decentralized</p>
-        <motion.button 
+        <motion.button
           className="btn"
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate("/dashboard")}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           Get Started
         </motion.button>
-        
+
         <div className="info-section card">
           <h2>What is A-MACI?</h2>
           <p>
-            A-MACI (Anonymous Minimal Anti-Collusion Infrastructure) is a 
-            revolutionary solution for decentralized governance, ensuring 
+            A-MACI (Anonymous Minimal Anti-Collusion Infrastructure) is a
+            revolutionary solution for decentralized governance, ensuring
             privacy and preventing collusion in voting systems.
           </p>
           <ul>

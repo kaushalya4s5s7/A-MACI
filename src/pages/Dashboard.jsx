@@ -169,7 +169,7 @@ const Dashboard = () => {
     <div className="dashboard">
       <MatrixRain />
       <nav className="dashboard-nav">
-        <h2>A-MACI Dashboard</h2>
+        <h2>Aegis Dashboard</h2>
         <button className="btn btn-logout" onClick={handleLogout}>
           Logout
         </button>
