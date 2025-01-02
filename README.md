@@ -61,7 +61,7 @@ The **A-MACI Dashboard** is a cutting-edge Web3 solution designed for secure cry
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/your-username/amaci-dashboard](https://github.com/kaushalya4s5s7/A-MACI.git)
+   git clone https://github.com/kaushalya4s5s7/A-MACI.git
    cd A-MACI
    ```
 2. Install dependencies:
